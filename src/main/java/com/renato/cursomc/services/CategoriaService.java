@@ -22,10 +22,15 @@ public class CategoriaService {
 	public Categoria salvar(Categoria cat) {
 		return categoriaRepository.save(cat);
 	}
-	
+
+	public List<Categoria> salvarAll(Iterable<Categoria> lstCat) {
+		return categoriaRepository.saveAll(lstCat);
+	}
+
 	public List<Categoria> listar() {
 		return categoriaRepository.findAll();
 	}
+	
 	
 	
 	
