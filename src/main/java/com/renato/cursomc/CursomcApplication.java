@@ -7,12 +7,13 @@ import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.renato.cursomc.domain.Categoria;
+import com.renato.cursomc.domain.Produto;
 import com.renato.cursomc.services.CategoriaService;
+import com.renato.cursomc.services.ProdutoService;
 
 @SpringBootApplication
 @RestController
@@ -20,8 +21,8 @@ public class CursomcApplication implements CommandLineRunner{
 	
 	@Autowired
 	private CategoriaService categoriaService;
-	
-	
+	@Autowired
+	private ProdutoService produtoService;
 
 	public static void main(String[] args) {
 		SpringApplication.run(CursomcApplication.class, args);
@@ -42,7 +43,19 @@ public class CursomcApplication implements CommandLineRunner{
 		Categoria cat1 = new Categoria("Informatica");
 		Categoria cat2 = new Categoria("Escritorio");
 		
+		Produto p1 = new Produto("Computador",2000.00);
+		Produto p2 = new Produto("Impresora",800.00);
+		Produto p3 = new Produto("Mouse",80.00);
+		
+		cat1.getProdutos().addAll(Arrays.asList(p1,p2,p3));
+		cat2.getProdutos().addAll(Arrays.asList(p2));
+		
+		p1.getCategorias().addAll(Arrays.asList(cat1));
+		p2.getCategorias().addAll(Arrays.asList(cat1,cat2));
+		p3.getCategorias().addAll(Arrays.asList(cat1));
+		
 		categoriaService.salvarAll(Arrays.asList(cat1,cat2));
+		produtoService.saveAll(Arrays.asList(p1,p2,p3));
 		
 	}
 
