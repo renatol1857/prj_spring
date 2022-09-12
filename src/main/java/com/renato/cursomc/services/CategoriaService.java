@@ -12,7 +12,7 @@ import com.renato.cursomc.services.execption.ObjectNotFoundException;
 
 @Service
 public class CategoriaService {
-	
+
 	@Autowired
 	private CategoriaRepository categoriaRepository;
 
@@ -21,8 +21,9 @@ public class CategoriaService {
 		 * return categoriaRepository.findById(id);
 		 */
 		Optional<Categoria> obj = categoriaRepository.findById(id);
-		return obj.orElseThrow(() -> new ObjectNotFoundException(String.format("Categoria nao encontrada ID %d Tipo %s", id,Categoria.class.getName())));
-		
+		return obj.orElseThrow(() -> new ObjectNotFoundException(
+				String.format("Categoria nao encontrada ID %d Tipo %s", id, Categoria.class.getName())));
+
 	}
 
 	public Categoria salvar(Categoria cat) {
@@ -36,8 +37,5 @@ public class CategoriaService {
 	public List<Categoria> listar() {
 		return categoriaRepository.findAll();
 	}
-	
-	
-	
-	
+
 }
