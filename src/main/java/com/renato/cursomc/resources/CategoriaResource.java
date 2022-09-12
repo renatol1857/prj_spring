@@ -29,10 +29,8 @@ public class CategoriaResource {
 	}
 
 	@GetMapping("/{id}")
-	public ResponseEntity<Object> buscarPor(@PathVariable("id") Integer id) {
-		Optional<Categoria> obj = categoriaService.buscarPor(id);
-		if (obj.isEmpty())
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Categodia ID " + id + " nao encontrada.");
+	public ResponseEntity<Categoria> buscarPor(@PathVariable("id") Integer id) {
+		Categoria obj = categoriaService.buscarPor(id);
 		return ResponseEntity.status(HttpStatus.OK).body(obj);
 	}
 
