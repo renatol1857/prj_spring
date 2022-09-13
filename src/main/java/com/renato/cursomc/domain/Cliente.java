@@ -15,6 +15,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.renato.cursomc.domain.enums.TipoCliente;
 
 import lombok.Getter;
@@ -38,6 +39,7 @@ public class Cliente implements Serializable {
 	// private TipoCliente tipo;
 	private Integer tipo;
 
+	@JsonManagedReference
 	@OneToMany(mappedBy = "cliente")
 	private List<Endereco> enderecos = new ArrayList<>();
 

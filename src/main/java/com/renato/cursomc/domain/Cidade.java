@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -25,6 +27,7 @@ public class Cidade implements Serializable {
 	private Integer id;
 	private String nome;
 	
+	@JsonManagedReference
 	@ManyToOne
 	private Estado estado;
 
