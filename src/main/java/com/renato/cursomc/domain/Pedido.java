@@ -1,47 +1,51 @@
 package com.renato.cursomc.domain;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.Date;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
-
-import com.fasterxml.jackson.annotation.JsonBackReference;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@Getter
 @Setter
+@Getter
 @NoArgsConstructor
 @EqualsAndHashCode(onlyExplicitlyIncluded = true)
 @Entity
-public class Produto implements Serializable {
+public class Pedido implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@EqualsAndHashCode.Include()
 	private Integer id;
-	private String nome;
-	private Double preco;
+	private Date instante;
 
-	@JsonBackReference
-	@ManyToMany
-	private List<Categoria> categorias = new ArrayList<>();
+	@OneToOne(cascade = CascadeType.ALL, mappedBy = "pedido")
+	private Pagamento pagamento;
 
-	public Produto(String nome, Double preco) {
+	@ManyToOne
+	private Cliente cliente;
+
+	@ManyToOne
+	private Endereco enderecoDeEntrega;
+
+	public Pedido(Date instante, Cliente cliente, Endereco enderecoDeEntrega) {
 		super();
-		this.nome = nome;
-		this.preco = preco;
-	}
+		this.instante = instante;
+		this.cliente = cliente;
+		this.enderecoDeEntrega = enderecoDeEntrega;
+	}	
+	
 
 
 }
